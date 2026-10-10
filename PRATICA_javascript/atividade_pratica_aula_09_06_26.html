@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade Javascript</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <h1>Atividade Prática</h1> /*- Título da página */
+
+    /*- Seção 1: Manipulação de texto */
+    <section>
+        <h2>Parte 1</h2>
+        <p id="texto1">Vai Brasil</p>
+        <button onclick="mudarTexto()">Mudar mensagem</button>
+        <button onclick="mudarCor()">Mudar cor</button>
+        <button onclick="mudarTamanho()">Mudar tamanho</button>
+        <button onclick="mudarEstilo()">Negrito / itálico</button>
+        <button onclick="mostrarCaixaTexto()">Adicionar novo texto</button>
+        <div id="caixaNovoTexto" style="display:none; margin-top: 10px;">
+            <input id="novoTexto" type="text" placeholder="Digite uma mensagem" style="width: 100%; margin-bottom: 8px;">
+            <button onclick="salvarMensagem()">Salvar mensagem</button>
+        </div>
+    </section>
+
+    /*- Seção 2: Manipulação de imagens */
+    <section>
+        <h2>Parte 2</h2>
+        <img id="imagem1" src="imagem/CopaDoBrasil.png" alt="Imagem">
+        <button onclick="trocarImagem()">Trocar imagem</button>
+    </section>
+
+    /*- Seção 3: Mostrar / ocultar elementos */
+    <section>
+        <h2>Parte 3</h2>
+        <p id="texto2">Texto para ocultar.</p>
+        <button onclick="esconderTexto()">Mostrar / ocultar texto</button>
+        <button onclick="esconderEmoji()">Mostrar / ocultar emoji</button>
+        <button onclick="esconderImagem3()">Mostrar / ocultar imagem</button>
+        <p id="emoji1" style="font-size: 32px; margin: 10px 0;">😊</p>
+        <img id="imagem3" src="imagem/imagem3.jpg" alt="Imagem 3" style="display: block; margin-top: 10px; max-width: 220px;">
+    </section>
+
+    /*- Seção 4: Manipulação de eventos */
+    <section>
+        <h2>Parte 4</h2>
+        <ul>
+            <li>
+                <strong>onmouseover</strong> - quando o mouse entra num elemento.
+                <div onmouseover="mostrarMsg('msg1','Mouse entrou!')" style="margin-top:5px; padding:5px; border:1px solid #ccc; width:160px;">Passe o mouse aqui</div>
+                <p id="msg1"></p>
+            </li>
+            <li>
+                <strong>onmouseout</strong> - quando o mouse sai de um elemento.
+                <div onmouseout="mostrarMsg('msg2','Mouse saiu!')" style="margin-top:5px; padding:5px; border:1px solid #ccc; width:160px;">Mova o mouse para fora</div>
+                <p id="msg2"></p>
+            </li>
+            <li>
+                <strong>ondblclick</strong> - quando dá dois cliques.
+                <button ondblclick="mostrarMsg('msg3','Duplo clique detectado')" style="margin-top:5px;">Dê dois cliques</button>
+                <p id="msg3"></p>
+            </li>
+            <li>
+                <strong>onkeydown</strong> - quando aperta uma tecla.
+                <input onkeydown="mostrarMsg('msg4','Tecla pressionada')" placeholder="Aperte uma tecla" style="margin-top:5px;">
+                <p id="msg4"></p>
+            </li>
+            <li>
+                <strong>onchange</strong> - quando muda o valor de um campo.
+                <select onchange="mostrarMsg('msg5','Valor alterado')" style="margin-top:5px;">
+                    <option value="">Escolha uma opção</option>
+                    <option value="1">Opção 1</option>
+                    <option value="2">Opção 2</option>
+                </select>
+                <p id="msg5"></p>
+            </li>
+        </ul>
+    </section>
+
+    <script src="scripts.js"></script> /*- Link para o arquivo JavaScript externo */
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil • SheTech</title>
+  <link rel="stylesheet" href="vendor/fonts/fonts.css">
+  <link rel="stylesheet" href="vendor/lucide/lucide.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/perfil.css">
+</head>
+<body>
+
+      <aside class="sidebar">
+    <div class="logo"><span class="logo-text">She<span class="accent">Tech</span></span></div>
+    <nav class="nav">
+      <a href="dashboard.html" class="nav-item" data-page="dashboard"><i class="icon-house"></i> <span class="nav-label">Início</span></a>
+      <a href="projetos.html" class="nav-item" data-page="projetos"><i class="icon-folder-kanban"></i> <span class="nav-label">Projetos</span></a>
+      <a href="eventos.html" class="nav-item" data-page="eventos"><i class="icon-calendar-days"></i> <span class="nav-label">Eventos</span></a>
+      <a href="comunidade.html" class="nav-item" data-page="comunidade"><i class="icon-users"></i> <span class="nav-label">Comunidade</span></a>
+      <a href="perfil.html" class="nav-item" data-page="perfil"><i class="icon-user"></i> <span class="nav-label">Perfil</span></a>
+      <a href="links.html" class="nav-item" data-page="links"><i class="icon-link"></i> <span class="nav-label">Links</span></a>
+      <a href="configuracoes.html" class="nav-item" data-page="configuracoes"><i class="icon-settings"></i> <span class="nav-label">Configurações</span></a>
+    </nav>
+        <div class="sidebar-foot" style="margin-top:auto; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+      <a href="#" class="nav-item" onclick="State.logout(); window.location.href='login.html';" style="color: var(--pink-2);">
+        <i class="icon-log-out"></i> <span class="nav-label">Sair</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <h1 class="page-title">Meu Perfil</h1>
+      <div class="topbar-actions">
+        <a href="perfil.html" class="me">
+          <img id="top-avatar" src="assets/avatars/avatar.svg" alt="Avatar" />
+          <span id="top-name">Olá</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- COVER + HERO -->
+      <div class="profile-hero card">
+        <div class="profile-cover" id="profile-cover-bg" style="background-size: cover; background-position: center;">
+          <div class="cover-gradient"></div>
+        </div>
+        <div class="profile-hero-body">
+          <div class="profile-avatar-wrap">
+            <img id="profile-avatar" src="assets/avatars/avatar.svg" alt="Avatar" class="profile-avatar-img" />
+            <span class="avatar-online-dot" title="Online agora"></span>
+          </div>
+          <div class="profile-info">
+            <div class="profile-info-top">
+              <div>
+                <h2 id="profile-name" class="profile-display-name">Seu nome</h2>
+                <p id="profile-user" class="profile-username">@seuusuario</p>
+                <p id="profile-bio" class="profile-bio">Adicione uma biografia para compartilhar sua história com a comunidade.</p>
+              </div>
+              <div class="profile-actions">
+                <a href="editar-perfil.html" class="btn btn-primary"><i class="icon-pencil"></i> Editar</a>
+                <button class="btn btn-ghost btn-icon" title="Compartilhar perfil" id="share-btn">
+                  <i class="icon-share-2"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="profile-quick-stats">
+              <div class="quick-stat">
+                <span class="quick-stat-num" id="stat-projetos">0</span>
+                <span class="quick-stat-label">Projetos</span>
+              </div>
+              <div class="quick-stat-divider"></div>
+              <div class="quick-stat">
+                <span class="quick-stat-num" id="stat-eventos">0</span>
+                <span class="quick-stat-label">Eventos</span>
+              </div>
+              <div class="quick-stat-divider"></div>
+              <div class="quick-stat">
+                <span class="quick-stat-num" id="stat-conexoes">0</span>
+                <span class="quick-stat-label">Conexões</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID PRINCIPAL -->
+      <div class="profile-layout">
+
+        <!-- COLUNA ESQUERDA (sidebar info) -->
+        <aside class="profile-sidebar">
+
+          <!-- Informações -->
+          <div class="card info-card">
+            <h3 class="card-section-title"><i class="icon-info"></i> Sobre</h3>
+            <p id="profile-about-text" style="font-size: 14px; color: var(--gray-700); line-height: 1.6; margin-bottom: 20px; white-space: pre-wrap;">
+              Conte um pouco sobre você editando seu perfil.
+            </p>
+            
+            <ul class="info-list">
+              <li class="info-item">
+                <i class="icon-mail"></i>
+                <span id="profile-email">seuemail@shetech.com.br</span>
+              </li>
+              <li class="info-item">
+                <i class="icon-briefcase"></i>
+                <span id="profile-role-info">Membro SheTech</span>
+              </li>
+              <li class="info-item">
+                <i class="icon-calendar"></i>
+                <span>Membro desde <strong id="profile-date">hoje</strong></span>
+              </li>
+            </ul>
+
+            <div class="info-divider"></div>
+
+            <!-- Links sociais -->
+            <div class="social-links" id="profile-social-links">
+              <!-- Links dinâmicos -->
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="card info-card">
+            <h3 class="card-section-title"><i class="icon-code-2"></i> Habilidades</h3>
+            <div class="skills-list" id="skills-list">
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">UI/UX</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">AWS</span>
+            </div>
+          </div>
+
+<!-- Conquistas removidas -->
+
+        </aside>
+
+        <!-- COLUNA DIREITA (conteúdo principal) -->
+        <div class="profile-main">
+
+          <!-- Tabs -->
+          <div class="profile-tabs-wrap">
+            <div class="profile-tabs">
+              <button class="profile-tab active" data-tab="timeline">
+                <i class="icon-activity"></i> Linha do Tempo
+              </button>
+              <button class="profile-tab" data-tab="projetos">
+                <i class="icon-folder-kanban"></i> Projetos
+              </button>
+              <button class="profile-tab" data-tab="eventos">
+                <i class="icon-calendar-days"></i> Eventos
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB: LINHA DO TEMPO -->
+          <div class="tab-panel active" id="tab-timeline">
+
+            <!-- Filtro de timeline -->
+            <div class="timeline-filter">
+              <button class="tl-filter-btn active" data-filter="all">Tudo</button>
+              <button class="tl-filter-btn" data-filter="projeto">Projetos</button>
+              <button class="tl-filter-btn" data-filter="evento">Eventos</button>
+
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline" id="timeline-list">
+              <div class="card" style="padding: 24px; text-align: center; color: var(--gray-600);">
+                <i class="icon-clock" style="font-size: 28px; color: var(--pink); margin-bottom: 10px; display: inline-block;"></i>
+                <h4 style="margin: 0 0 8px; color: var(--ink);">Sua linha do tempo aparecerá aqui</h4>
+                <p style="margin: 0;">Adicione projetos, eventos e conquistas para construir seu histórico profissional na plataforma.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: PROJETOS -->
+          <div class="tab-panel" id="tab-projetos">
+            <div class="projects-grid" id="projects-grid">
+              <div class="card" style="padding: 24px; text-align: center; color: var(--gray-600); grid-column: 1 / -1;">
+                <i class="icon-folder-kanban" style="font-size: 28px; color: var(--pink); margin-bottom: 10px; display: inline-block;"></i>
+                <h4 style="margin: 0 0 8px; color: var(--ink);">Nenhum projeto por enquanto</h4>
+                <p style="margin: 0;">Crie seu primeiro projeto e ele aparecerá aqui.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: EVENTOS -->
+          <div class="tab-panel" id="tab-eventos">
+            <div class="events-list" id="events-list">
+              <div class="card" style="padding: 24px; text-align: center; color: var(--gray-600);">
+                <i class="icon-calendar-days" style="font-size: 28px; color: var(--pink); margin-bottom: 10px; display: inline-block;"></i>
+                <h4 style="margin: 0 0 8px; color: var(--ink);">Nenhum evento cadastrado</h4>
+                <p style="margin: 0;">Quando você criar eventos, eles aparecerão aqui.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/perfil.js"></script>
+</body>
+</html>

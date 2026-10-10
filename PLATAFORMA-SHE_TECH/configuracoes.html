@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configurações • SheTech</title>
+  <link rel="stylesheet" href="vendor/fonts/fonts.css">
+  <link rel="stylesheet" href="vendor/lucide/lucide.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/configuracoes.css">
+</head>
+<body>
+          <aside class="sidebar">
+    <div class="logo"><span class="logo-text">She<span class="accent">Tech</span></span></div>
+    <nav class="nav">
+      <a href="dashboard.html" class="nav-item" data-page="dashboard"><i class="icon-house"></i> <span class="nav-label">Início</span></a>
+      <a href="projetos.html" class="nav-item" data-page="projetos"><i class="icon-folder-kanban"></i> <span class="nav-label">Projetos</span></a>
+      <a href="eventos.html" class="nav-item" data-page="eventos"><i class="icon-calendar-days"></i> <span class="nav-label">Eventos</span></a>
+      <a href="comunidade.html" class="nav-item" data-page="comunidade"><i class="icon-users"></i> <span class="nav-label">Comunidade</span></a>
+      <a href="perfil.html" class="nav-item" data-page="perfil"><i class="icon-user"></i> <span class="nav-label">Perfil</span></a>
+      <a href="links.html" class="nav-item" data-page="links"><i class="icon-link"></i> <span class="nav-label">Links</span></a>
+      <a href="configuracoes.html" class="nav-item" data-page="configuracoes"><i class="icon-settings"></i> <span class="nav-label">Configurações</span></a>
+    </nav>
+    <div class="sidebar-foot" style="margin-top:auto; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+      <a href="#" class="nav-item" onclick="State.logout(); window.location.href='login.html';" style="color: var(--pink-2);">
+        <i class="icon-log-out"></i> <span class="nav-label">Sair</span>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1 class="page-title">Configurações</h1>
+    </header>
+
+    <div class="page-content config-layout">
+
+      <!-- NAV LATERAL DE SEÇÕES -->
+      <nav class="config-nav">
+        <a href="#conta"        class="config-nav-item active" data-section="conta">
+          <i class="icon-user"></i> Conta
+        </a>
+        <a href="#seguranca"    class="config-nav-item" data-section="seguranca">
+          <i class="icon-shield"></i> Segurança
+        </a>
+        <a href="#notificacoes" class="config-nav-item" data-section="notificacoes">
+          <i class="icon-bell"></i> Notificações
+        </a>
+<!-- Seção Aparência removida -->
+        <a href="#privacidade"  class="config-nav-item" data-section="privacidade">
+          <i class="icon-lock"></i> Privacidade
+        </a>
+        <a href="#perigo"       class="config-nav-item config-nav-danger" data-section="perigo">
+          <i class="icon-triangle-alert"></i> Zona de Perigo
+        </a>
+      </nav>
+
+      <!-- CONTEÚDO DAS SEÇÕES -->
+      <div class="config-sections">
+
+        <!-- CONTA -->
+        <section class="config-section card" id="conta">
+          <div class="config-section-head">
+            <i class="icon-user"></i>
+            <div>
+              <h2>Conta</h2>
+              <p>Gerencie suas informações básicas de acesso.</p>
+            </div>
+          </div>
+          <form id="settings-form" class="config-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="settings-name">Nome Completo</label>
+                <input type="text" id="settings-name" placeholder="Seu nome completo" required />
+              </div>
+              <div class="form-group">
+                <label for="settings-username">Nome de usuária</label>
+                <input type="text" id="settings-username" placeholder="@seuuser" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="settings-email">E-mail</label>
+              <input type="email" id="settings-email" disabled />
+              <span class="form-hint">O e-mail não pode ser alterado.</span>
+            </div>
+            <div class="form-group">
+              <label for="settings-lang">Idioma do Sistema</label>
+              <select id="settings-lang">
+                <option value="pt-BR">Português (Brasil)</option>
+              </select>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- SEGURANÇA -->
+        <section class="config-section card" id="seguranca">
+          <div class="config-section-head">
+            <i class="icon-shield"></i>
+            <div>
+              <h2>Segurança</h2>
+              <p>Mantenha sua conta protegida.</p>
+            </div>
+          </div>
+
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Senha</strong>
+              <span>Mantenha sua senha atualizada e segura</span>
+            </div>
+            <button class="btn btn-ghost" onclick="openPasswordModal()">Alterar Senha</button>
+          </div>
+
+<!-- Verificação em duas etapas e Sessões ativas removidas -->
+        </section>
+
+        <!-- NOTIFICAÇÕES -->
+        <section class="config-section card" id="notificacoes">
+          <div class="config-section-head">
+            <i class="icon-bell"></i>
+            <div>
+              <h2>Notificações</h2>
+              <p>Escolha o que você quer receber.</p>
+            </div>
+          </div>
+
+          <p class="config-group-label">Na plataforma</p>
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Novos eventos</strong>
+              <span>Avisos sobre eventos próximos</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="notif-eventos" checked />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Novas conexões</strong>
+              <span>Quando alguém se conectar com você</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="notif-conexoes" checked />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Comentários nos seus projetos</strong>
+              <span>Interações na sua área de projetos</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="notif-projetos" checked />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+
+          <p class="config-group-label" style="margin-top:20px">Por e-mail</p>
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Resumo semanal</strong>
+              <span>Um e-mail por semana com novidades</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="notif-email-resumo" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Novidades da plataforma</strong>
+              <span>Atualizações e lançamentos SheTech</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="notif-email-novidades" checked />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveNotifSettings()">Salvar preferências</button>
+          </div>
+        </section>
+
+<!-- Seção Aparência removida -->
+
+        <!-- PRIVACIDADE -->
+        <section class="config-section card" id="privacidade">
+          <div class="config-section-head">
+            <i class="icon-lock"></i>
+            <div>
+              <h2>Privacidade</h2>
+              <p>Controle quem pode ver suas informações.</p>
+            </div>
+          </div>
+
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Perfil público</strong>
+              <span>Permite que outros membros vejam seu perfil</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="priv-perfil" checked />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Mostrar e-mail no perfil</strong>
+              <span>Exibe seu e-mail para outras membros</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="priv-email" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Indexar perfil em buscas</strong>
+              <span>Aparecer em resultados de pesquisa internos</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="priv-busca" checked />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="savePrivSettings()">Salvar preferências</button>
+          </div>
+        </section>
+
+        <!-- ZONA DE PERIGO -->
+        <section class="config-section card danger-zone" id="perigo">
+          <div class="config-section-head">
+            <i class="icon-triangle-alert" style="color:#e53935"></i>
+            <div>
+              <h2 style="color:#e53935">Zona de Perigo</h2>
+              <p>Ações irreversíveis. Prossiga com cuidado.</p>
+            </div>
+          </div>
+
+<!-- Exportar dados removido -->
+
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Desativar conta</strong>
+              <span>Sua conta ficará oculta, mas pode ser reativada</span>
+            </div>
+            <button class="btn btn-ghost btn-sm btn-danger-soft" onclick="deactivateAccount()">
+              Desativar
+            </button>
+          </div>
+
+          <div class="config-row">
+            <div class="config-row-info">
+              <strong>Excluir conta permanentemente</strong>
+              <span>Remove todos os seus dados. Esta ação não pode ser desfeita.</span>
+            </div>
+            <button class="btn btn-danger" onclick="deleteAccount()">
+              <i class="icon-trash-2"></i> Excluir conta
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Alterar Senha -->
+  <div id="password-modal" class="modal modal-password">
+    <div class="modal-content modal-password-content">
+      <div class="modal-header">
+        <h2>Alterar Senha</h2>
+        <button class="modal-close" onclick="closePasswordModal()"><i class="icon-x"></i></button>
+      </div>
+      <form id="password-form">
+        <div class="form-group">
+          <label for="current-password">Senha Atual</label>
+          <input type="password" id="current-password" required />
+        </div>
+        <div class="form-group">
+          <label for="new-password">Nova Senha</label>
+          <input type="password" id="new-password" required />
+        </div>
+        <div class="form-group">
+          <label for="confirm-new-password">Confirmar Nova Senha</label>
+          <input type="password" id="confirm-new-password" required />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" onclick="closePasswordModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Atualizar Senha</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/configuracoes.js"></script>
+</body>
+</html>

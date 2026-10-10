@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar Perfil • SheTech</title>
+  <link rel="stylesheet" href="vendor/fonts/fonts.css">
+  <link rel="stylesheet" href="vendor/lucide/lucide.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/editar-perfil.css">
+</head>
+<body>
+          <aside class="sidebar">
+    <div class="logo"><span class="logo-text">She<span class="accent">Tech</span></span></div>
+    <nav class="nav">
+      <a href="dashboard.html" class="nav-item" data-page="dashboard"><i class="icon-house"></i> <span class="nav-label">Início</span></a>
+      <a href="projetos.html" class="nav-item" data-page="projetos"><i class="icon-folder-kanban"></i> <span class="nav-label">Projetos</span></a>
+      <a href="eventos.html" class="nav-item" data-page="eventos"><i class="icon-calendar-days"></i> <span class="nav-label">Eventos</span></a>
+      <a href="comunidade.html" class="nav-item" data-page="comunidade"><i class="icon-users"></i> <span class="nav-label">Comunidade</span></a>
+      <a href="perfil.html" class="nav-item" data-page="perfil"><i class="icon-user"></i> <span class="nav-label">Perfil</span></a>
+      <a href="links.html" class="nav-item" data-page="links"><i class="icon-link"></i> <span class="nav-label">Links</span></a>
+      <a href="configuracoes.html" class="nav-item" data-page="configuracoes"><i class="icon-settings"></i> <span class="nav-label">Configurações</span></a>
+    </nav>
+        <div class="sidebar-foot" style="margin-top:auto; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+      <a href="#" class="nav-item" onclick="State.logout(); window.location.href='login.html';" style="color: var(--pink-2);">
+        <i class="icon-log-out"></i> <span class="nav-label">Sair</span>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1 class="page-title">Editar Perfil</h1>
+      <div class="topbar-actions">
+        <a href="perfil.html" class="btn btn-outline" style="padding: 6px 12px; font-size: 13px;">
+          <i class="icon-arrow-left"></i> Voltar
+        </a>
+        <a href="perfil.html" class="me"><img id="top-avatar" src="assets/avatars/avatar.svg" alt="" /><span id="top-name">Olá</span></a>
+      </div>
+    </header>
+
+    <div class="page-content edit-layout">
+
+      <!-- COLUNA PRINCIPAL -->
+      <div class="edit-main">
+
+        <!-- SEÇÃO: IDENTIDADE -->
+        <div class="card edit-section">
+          <div class="edit-section-head">
+            <i class="icon-user-circle"></i>
+            <div>
+              <h2>Identidade</h2>
+              <p>Como você aparece para outras membros.</p>
+            </div>
+          </div>
+
+          <div class="edit-cover-row" style="margin-bottom: 30px;">
+            <p class="avatar-hint-title" style="margin-bottom: 10px;">Capa do Perfil</p>
+            <div class="edit-cover-wrap" style="width: 100%; height: 120px; border-radius: 12px; background: var(--gray-100); position: relative; overflow: hidden; border: 1px dashed var(--gray-300);">
+              <img id="edit-cover-preview" src="" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
+              <label for="cover-upload" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; color: var(--gray-500); gap: 5px;">
+                <i class="icon-image" style="font-size: 24px;"></i>
+                <span style="font-size: 12px;">Alterar Capa</span>
+              </label>
+              <input type="file" id="cover-upload" hidden accept="image/*" />
+            </div>
+          </div>
+
+          <div class="edit-avatar-row">
+            <div class="edit-avatar-wrap">
+              <img id="edit-avatar-preview" src="" alt="Foto de perfil" />
+              <label for="avatar-upload" class="avatar-cam-btn" title="Trocar foto">
+                <i class="icon-camera"></i>
+              </label>
+              <input type="file" id="avatar-upload" hidden accept="image/*" />
+            </div>
+            <div class="avatar-hints">
+              <p class="avatar-hint-title">Foto de perfil</p>
+              <p class="avatar-hint-sub">JPG, PNG ou GIF · Máx. 2 MB</p>
+              <button type="button" class="btn-remove-avatar" id="btn-remove-avatar">
+                <i class="icon-trash-2"></i> Remover foto
+              </button>
+            </div>
+          </div>
+
+          <form id="edit-profile-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="edit-name">Nome Completo <span class="req">*</span></label>
+                <input type="text" id="edit-name" placeholder="Seu nome completo" required maxlength="80" />
+                <span class="field-error" id="err-name"></span>
+              </div>
+              <div class="form-group">
+                <label for="edit-username">Nome de usuária (@) <span class="req">*</span></label>
+                <div class="input-prefix-wrap">
+                  <span class="input-prefix">@</span>
+                  <input type="text" id="edit-username" placeholder="seuuser" required maxlength="30" />
+                </div>
+                <span class="field-error" id="err-username"></span>
+              </div>
+              <div class="form-group">
+                <label for="edit-role">Cargo / Título</label>
+                <input type="text" id="edit-role" placeholder="Ex: Desenvolvedora Fullstack" maxlength="60" />
+              </div>
+              <div class="form-group">
+                <label for="edit-area">Área de atuação</label>
+                <select id="edit-area" onchange="toggleCustomArea(this.value)">
+                  <option value="">Selecione...</option>
+                  <option value="Desenvolvimento">Desenvolvimento</option>
+                  <option value="Design">Design / UX</option>
+                  <option value="Dados">Dados / IA</option>
+                  <option value="Produto">Produto</option>
+                  <option value="Segurança">Segurança</option>
+                  <option value="DevOps">DevOps / Cloud</option>
+                  <option value="Gestão">Gestão de TI</option>
+                  <option value="Outra">Outra</option>
+                </select>
+                <input type="text" id="edit-area-custom" placeholder="Digite sua atuação" style="display: none; margin-top: 10px;" />
+              </div>
+              <div class="form-group full">
+                <label for="edit-bio">Biografia (Frase curta)</label>
+                <textarea id="edit-bio" placeholder="Uma frase curta que te define..." rows="2" maxlength="150"></textarea>
+                <div class="char-count"><span id="bio-count">0</span>/150</div>
+              </div>
+              <div class="form-group full">
+                <label for="edit-about">Sobre (Texto detalhado)</label>
+                <textarea id="edit-about" placeholder="Conte mais sobre sua trajetória, experiências e objetivos..." rows="6" maxlength="1000"></textarea>
+                <div class="char-count"><span id="about-count">0</span>/1000</div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- SEÇÃO: HABILIDADES -->
+        <div class="card edit-section">
+          <div class="edit-section-head">
+            <i class="icon-zap"></i>
+            <div>
+              <h2>Habilidades</h2>
+              <p>Adicione suas principais tecnologias e competências.</p>
+            </div>
+          </div>
+          <div class="skills-input-row">
+            <input type="text" id="skill-input" placeholder="Ex: React, Python, Figma..." maxlength="30" />
+            <button type="button" class="btn-add-skill" id="btn-add-skill">
+              <i class="icon-plus"></i> Adicionar
+            </button>
+          </div>
+          <div class="skills-tags" id="skills-tags"></div>
+          <p class="skills-hint">Pressione Enter ou clique em Adicionar · Máx. 15 habilidades</p>
+        </div>
+
+        <!-- SEÇÃO: LINKS -->
+        <div class="card edit-section">
+          <div class="edit-section-head">
+            <i class="icon-link"></i>
+            <div>
+              <h2>Links e Redes Sociais</h2>
+              <p>Compartilhe seu portfólio e presença online.</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="edit-linkedin">
+                <i class="icon-linkedin"></i> LinkedIn
+              </label>
+              <input type="url" id="edit-linkedin" placeholder="https://linkedin.com/in/seuuser" />
+            </div>
+            <div class="form-group">
+              <label for="edit-github">
+                <i class="icon-github"></i> GitHub
+              </label>
+              <input type="url" id="edit-github" placeholder="https://github.com/seuuser" />
+            </div>
+            <div class="form-group">
+              <label for="edit-portfolio">
+                <i class="icon-globe"></i> Portfólio / Site
+              </label>
+              <input type="url" id="edit-portfolio" placeholder="https://seusite.com" />
+            </div>
+            <div class="form-group">
+              <label for="edit-instagram">
+                <i class="icon-instagram"></i> Instagram
+              </label>
+              <input type="text" id="edit-instagram" placeholder="@seuuser" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUNA LATERAL: PRÉVIA + AÇÕES -->
+      <aside class="edit-side">
+        <div class="card preview-card">
+          <p class="preview-label">Prévia do perfil</p>
+          <div class="preview-avatar-wrap">
+            <img id="preview-avatar-img" src="" alt="" />
+          </div>
+          <p class="preview-name"  id="preview-name">Seu Nome</p>
+          <p class="preview-role"  id="preview-role">Cargo</p>
+          <p class="preview-bio"   id="preview-bio">Sua bio aparecerá aqui.</p>
+          <div class="preview-skills" id="preview-skills"></div>
+        </div>
+
+        <div class="edit-actions-sticky">
+          <button type="submit" form="edit-profile-form" class="btn btn-primary btn-full">
+            <i class="icon-check"></i> Salvar Alterações
+          </button>
+          <a href="perfil.html" class="btn btn-ghost btn-full">Cancelar</a>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/editar-perfil.js"></script>
+</body>
+</html>

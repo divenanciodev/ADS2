@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projetos • SheTech</title>
+  <link rel="stylesheet" href="vendor/fonts/fonts.css">
+  <link rel="stylesheet" href="vendor/lucide/lucide.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/projetos.css">
+  <link rel="stylesheet" href="css/modais-inscricao.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+    <div class="logo"><span class="logo-text">She<span class="accent">Tech</span></span></div>
+    <nav class="nav">
+      <a href="dashboard.html" class="nav-item" data-page="dashboard"><i class="icon-house"></i> <span class="nav-label">Início</span></a>
+      <a href="projetos.html" class="nav-item" data-page="projetos"><i class="icon-folder-kanban"></i> <span class="nav-label">Projetos</span></a>
+      <a href="eventos.html" class="nav-item" data-page="eventos"><i class="icon-calendar-days"></i> <span class="nav-label">Eventos</span></a>
+      <a href="comunidade.html" class="nav-item" data-page="comunidade"><i class="icon-users"></i> <span class="nav-label">Comunidade</span></a>
+      <a href="perfil.html" class="nav-item" data-page="perfil"><i class="icon-user"></i> <span class="nav-label">Perfil</span></a>
+      <a href="links.html" class="nav-item" data-page="links"><i class="icon-link"></i> <span class="nav-label">Links</span></a>
+      <a href="configuracoes.html" class="nav-item" data-page="configuracoes"><i class="icon-settings"></i> <span class="nav-label">Configurações</span></a>
+    </nav>
+        <div class="sidebar-foot" style="margin-top:auto; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+      <a href="#" class="nav-item" onclick="State.logout(); window.location.href='login.html';" style="color: var(--pink-2);">
+        <i class="icon-log-out"></i> <span class="nav-label">Sair</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <h1 class="page-title">Meus Projetos</h1>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" id="btn-novo-projeto">
+          <i class="icon-plus"></i> Novo Projeto
+        </button>
+        <a href="perfil.html" class="me">
+          <img id="top-avatar" src="assets/avatars/avatar.svg" alt="Avatar" />
+          <span id="top-name">Olá</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-mini">
+        <span class="stat-icon stat-icon--pink"><i class="icon-folder-kanban"></i></span>
+        <div>
+          <div class="stat-mini-num" id="stat-total">0</div>
+          <div class="stat-mini-label">Total</div>
+        </div>
+      </div>
+      <div class="stat-mini">
+        <span class="stat-icon stat-icon--blue"><i class="icon-loader"></i></span>
+        <div>
+          <div class="stat-mini-num" id="stat-em-dev">0</div>
+          <div class="stat-mini-label">Em desenvolvimento</div>
+        </div>
+      </div>
+      <div class="stat-mini">
+        <span class="stat-icon stat-icon--green"><i class="icon-check"></i></span>
+        <div>
+          <div class="stat-mini-num" id="stat-concluidos">0</div>
+          <div class="stat-mini-label">Concluídos</div>
+        </div>
+      </div>
+      <div class="stat-mini">
+        <span class="stat-icon stat-icon--orange"><i class="icon-lightbulb"></i></span>
+        <div>
+          <div class="stat-mini-num" id="stat-planejamento">0</div>
+          <div class="stat-mini-label">Em planejamento</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters-bar">
+      <div class="search-box">
+        <i class="icon-search"></i>
+        <input type="text" id="search-input" placeholder="Buscar projeto..." />
+      </div>
+      <div class="filter-chips">
+        <button class="chip chip--active" data-filter="todos">Total</button>
+        <button class="chip" data-filter="Em Desenvolvimento">Em Desenvolvimento</button>
+        <button class="chip" data-filter="Concluído">Concluídos</button>
+        <button class="chip" data-filter="Em Planejamento">Em Planejamento</button>
+        <button class="chip chip--inscritos" data-filter="inscritos"><i class="icon-check-circle"></i> Meus Inscritos</button>
+      </div>
+      <div class="view-toggle">
+        <button class="view-btn view-btn--active" id="view-grid" title="Grade"><i class="icon-layout-grid"></i></button>
+        <button class="view-btn" id="view-list" title="Lista"><i class="icon-layout-list"></i></button>
+      </div>
+    </div>
+
+    <!-- Lista de projetos -->
+    <div id="projects-container" class="projects-grid"></div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="empty-state" style="display:none">
+      <div class="empty-icon"><i class="icon-folder-open"></i></div>
+      <h3>Nenhum projeto encontrado</h3>
+      <p>Comece criando seu primeiro projeto ou ajuste os filtros.</p>
+      <button class="btn btn-primary" id="btn-empty-novo">
+        <i class="icon-plus"></i> Criar projeto
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ===== MODAL CRIAR / EDITAR ===== -->
+  <div id="project-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2 id="modal-title">Novo Projeto</h2>
+        <button class="modal-close" id="modal-close-btn" aria-label="Fechar"><i class="icon-x"></i></button>
+      </div>
+
+      <form id="project-form" novalidate>
+        <input type="hidden" id="project-id" />
+
+        <!-- Título -->
+        <div class="form-group">
+          <label for="project-titulo">Título do Projeto <span class="req">*</span></label>
+          <input type="text" id="project-titulo" placeholder="Ex: App de Finanças Pessoais" required />
+        </div>
+
+        <!-- Categoria e Status -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-categoria">Categoria</label>
+            <select id="project-categoria">
+              <option value="Web">Web</option>
+              <option value="Mobile">Mobile</option>
+              <option value="Design">Design</option>
+              <option value="Dados">Dados</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="project-status">Status</label>
+            <select id="project-status">
+              <option value="Em Planejamento">Em Planejamento</option>
+              <option value="Em Desenvolvimento">Em Desenvolvimento</option>
+              <option value="Concluído">Concluído</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Progresso -->
+        <div class="form-group">
+          <label for="project-progresso">Progresso <span class="progresso-valor" id="progresso-label">0%</span></label>
+          <input type="range" id="project-progresso" min="0" max="100" value="0" class="range-input" />
+          <div class="range-track-labels">
+            <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+          </div>
+        </div>
+
+        <!-- Link do repositório / demo -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-repo">Repositório</label>
+            <div class="input-icon-wrap">
+              <i class="icon-github"></i>
+              <input type="url" id="project-repo" placeholder="https://github.com/..." />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="project-demo">Demo / Link</label>
+            <div class="input-icon-wrap">
+              <i class="icon-link"></i>
+              <input type="url" id="project-demo" placeholder="https://..." />
+            </div>
+          </div>
+        </div>
+
+        <!-- Tecnologias -->
+        <div class="form-group">
+          <label for="project-tech-input">Tecnologias</label>
+          <div class="tech-input-wrap">
+            <div class="tech-tags" id="tech-tags"></div>
+            <input type="text" id="project-tech-input" placeholder="Digite e pressione Enter..." />
+          </div>
+          <p class="form-hint">Ex: React, Node.js, Figma</p>
+        </div>
+
+        <!-- Descrição -->
+        <div class="form-group">
+          <label for="project-descricao">Descrição</label>
+          <textarea id="project-descricao" rows="3" placeholder="Qual problema esse projeto resolve? Qual é o seu objetivo?"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" id="modal-cancel-btn">Cancelar</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="icon-check"></i> Salvar Projeto
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== MODAL DETALHES ===== -->
+  <div id="detail-modal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-content modal-content--detail">
+      <div class="modal-header">
+        <h2 id="detail-title">—</h2>
+        <button class="modal-close" id="detail-close-btn" aria-label="Fechar"><i class="icon-x"></i></button>
+      </div>
+      <div id="detail-body"></div>
+      <div class="form-actions" style="margin-top:24px">
+        <button class="btn btn-ghost" id="detail-edit-btn"><i class="icon-pencil"></i> Editar</button>
+        <button class="btn btn-danger" id="detail-delete-btn"><i class="icon-trash-2"></i> Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Inscrição em Projeto -->
+  <div id="modal-inscricao-projeto" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-content modal-inscricao-content">
+      <div class="modal-header">
+        <h2>Inscrição no Projeto</h2>
+        <button class="modal-close" onclick="closeInscricaoProjetoModal()"><i class="icon-x"></i></button>
+      </div>
+      <form id="form-inscricao-projeto">
+        <input type="hidden" id="inscricao-projeto-id">
+        <div class="modal-inscricao-body">
+          <div class="form-group">
+            <label for="proj-nome">Nome Completo</label>
+            <input type="text" id="proj-nome" required placeholder="Seu nome">
+          </div>
+          <div class="form-group">
+            <label for="proj-email">E-mail</label>
+            <input type="email" id="proj-email" required placeholder="seu@email.com">
+          </div>
+          <div class="form-group">
+            <label for="proj-motivo">Por que você quer participar deste projeto?</label>
+            <textarea id="proj-motivo" rows="3" required placeholder="Conte um pouco sobre seu interesse..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="proj-habilidades">Habilidades principais</label>
+            <input type="text" id="proj-habilidades" placeholder="Ex: React, UX Design, Python">
+          </div>
+        </div>
+        <div class="modal-inscricao-footer">
+          <button type="button" class="btn btn-ghost" onclick="closeInscricaoProjetoModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Enviar Inscrição</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Modal de Confirmação de Exclusão -->
+  <div id="modal-confirmar-exclusao" class="modal modal--confirm" role="dialog" aria-modal="true" aria-labelledby="confirm-delete-title">
+    <div class="modal-content modal-content--confirm">
+      <div class="confirm-icon-wrap">
+        <div class="confirm-icon">
+          <i class="icon-trash-2"></i>
+        </div>
+      </div>
+      <h2 id="confirm-delete-title" class="confirm-title">Excluir Projeto</h2>
+      <p class="confirm-desc">Tem certeza que deseja excluir o projeto <strong id="confirm-project-name"></strong>? Esta ação não pode ser desfeita.</p>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" id="confirm-cancel-btn">Cancelar</button>
+        <button class="btn btn-danger-solid" id="confirm-delete-btn">
+          <i class="icon-trash-2"></i> Excluir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/projetos.js"></script>
+  <script src="js/modais-inscricao.js"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Made In: Nordeste</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 32px;
+                font-family: Arial, sans-serif;
+                background-color: #f5f1e8;
+                color: #2f241d;
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 32px;
+            }
+
+            .detalhes-lugares {
+                display: grid;
+                gap: 24px;
+            }
+
+            .detalhe-lugar {
+                display: grid;
+                grid-template-columns: 280px 1fr;
+                gap: 24px;
+                align-items: stretch;
+                background-color: #ffffff;
+                border-radius: 18px;
+                overflow: hidden;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            }
+
+            .detalhe-lugar img {
+                width: 100%;
+                height: 100%;
+                min-height: 220px;
+                object-fit: cover;
+                display: block;
+            }
+
+            .info-lugar {
+                padding: 20px;
+            }
+
+            .info-lugar h2 {
+                margin: 0 0 16px;
+                font-size: 24px;
+            }
+
+            .descricao-lugar {
+                margin: 0 0 18px;
+                line-height: 1.6;
+            }
+
+            .bloco-info {
+                background-color: #f8f3ea;
+                border-radius: 12px;
+                padding: 16px;
+                margin-bottom: 14px;
+            }
+
+            .bloco-info h3 {
+                margin: 0 0 10px;
+                font-size: 18px;
+            }
+
+            .bloco-info p,
+            .bloco-info ul {
+                margin: 0;
+                line-height: 1.5;
+            }
+
+            .bloco-info ul {
+                padding-left: 20px;
+            }
+
+            .bloco-info a {
+                color: #0b5c63;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+            .bloco-info a:hover {
+                text-decoration: underline;
+            }
+
+            @media (max-width: 700px) {
+                body {
+                    padding: 20px;
+                }
+
+                .detalhe-lugar {
+                    grid-template-columns: 1fr;
+                }
+
+                .detalhe-lugar img {
+                    min-height: 200px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Lugares para você conhecer no Nordeste</h1>
+
+        <section class="detalhes-lugares">
+            <div class="detalhe-lugar">
+                <img src="Img/lencois maranhenses.jpg" alt="Lencois Maranhenses" />
+                <div class="info-lugar">
+                    <h2>Lençóis Maranhenses</h2>
+                    <p class="descricao-lugar">
+                        A areia branca e fina marca o caminho percorrido pelos viajantes em meio ao
+                        Parque Nacional dos Lençóis Maranhenses. As lagoas de água doce entre as
+                        dunas formam um cenário único e encantador.
+                    </p>
+                    <div class="bloco-info">
+                        <h3>Google Maps</h3>
+                        <p>
+                            <a href="https://maps.app.goo.gl/qFttxJwkQUSjbTTY6" target="_blank" rel="noopener noreferrer">
+                                Abrir localização no Google Maps
+                            </a>
+                        </p>
+                    </div>
+                    <div class="bloco-info">
+                        <h3>Restaurantes da região</h3>
+                        <ul>
+                            <li>Restaurante A Canoa</li>
+                            <li>Mangue Restaurante</li>
+                            <li>Restaurante da Carminha</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detalhe-lugar">
+                <img src="Img/Carolina.jpg" alt="Cachoeiras de Carolina" />
+                <div class="info-lugar">
+                    <h2>Cachoeiras de Carolina</h2>
+                    <p class="descricao-lugar">
+                        Carolina é conhecida pelas belas cachoeiras e paisagens naturais. É um lugar
+                        perfeito para quem quer relaxar, aproveitar a água cristalina e viver uma
+                        experiência cercada pela natureza.
+                    </p>
+                    <div class="bloco-info">
+                        <h3>Google Maps</h3>
+                        <p>
+                            <a href="https://maps.app.goo.gl/vd6FbXVFSkGKZGxj6" target="_blank" rel="noopener noreferrer">
+                                Abrir localização no Google Maps
+                            </a>
+                        </p>
+                    </div>
+                    <div class="bloco-info">
+                        <h3>Restaurantes da região</h3>
+                        <ul>
+                            <li>Casarão Distrito 7 (gastrobar)</li>
+                            <li>Tio Pepe Pizzaria, Churrascaria Estrela do Sul</li>
+                            <li>Cachoeiras do Itapecuru</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detalhe-lugar">
+                <img src="Img/Chapada das mesas.jpg" alt="Chapada das Mesas" />
+                <div class="info-lugar">
+                    <h2>Chapada das Mesas</h2>
+                    <p class="descricao-lugar">
+                        A Chapada das Mesas oferece mirantes impressionantes, formações rochosas e
+                        muito contato com a natureza. O visual é ideal para quem gosta de aventura e
+                        belas paisagens.
+                    </p>
+                    <div class="bloco-info">
+                        <h3>Google Maps</h3>
+                        <p>
+                            <a href="https://maps.app.goo.gl/yEaDRt1f3sPafcXo9" target="_blank" rel="noopener noreferrer">
+                                Abrir localização no Google Maps
+                            </a>
+                        </p>
+                    </div>
+                    <div class="bloco-info">
+                        <h3>Restaurantes da região</h3>
+                        <ul>
+                            <li>Tribo do Crepe</li>
+                            <li>Tio Pepe Pizzaria</li>
+                            <li>Espaço Gourmet</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detalhe-lugar">
+                <img src="Img/Palácio dos Leões.jpg" alt="Palacio dos Leoes" />
+                <div class="info-lugar">
+                    <h2>Palácio dos Leões</h2>
+                    <p class="descricao-lugar">
+                        O Palácio dos Leões é um dos principais pontos históricos de São Luís. Além da
+                        arquitetura marcante, o local oferece uma vista bonita e muito valor cultural.
+                    </p>
+                    <div class="bloco-info">
+                        <h3>Google Maps</h3>
+                        <p>
+                            <a href="https://maps.app.goo.gl/yEaDRt1f3sPafcXo9" target="_blank" rel="noopener noreferrer">
+                                Abrir localização no Google Maps
+                            </a>
+                        </p>
+                    </div>
+                    <div class="bloco-info">
+                        <h3>Restaurantes da região</h3>
+                        <ul>
+                            <li>Kazumi - Culinária Japonesa</li>
+                            <li>Benja's - Surf'n'turf</li>
+                            <li>El Patron Hamburgueria</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detalhe-lugar">
+                <img src="Img/Teatro Arthur.jpg" alt="Teatro Arthur Azevedo" />
+                <div class="info-lugar">
+                    <h2>Teatro Arthur Azevedo</h2>
+                    <p class="descricao-lugar">
+                        O Teatro Arthur Azevedo é um símbolo cultural e histórico. Visitar esse espaço
+                        é uma boa oportunidade para conhecer a arte, a história e a beleza da cidade.
+                    </p>
+                    <div class="bloco-info">
+                        <h3>Google Maps</h3>
+                        <p>
+                            <a href="https://maps.app.goo.gl/HP9EBGtwq3cFQuCW7" target="_blank" rel="noopener noreferrer">
+                                Abrir localização no Google Maps
+                            </a>
+                        </p>
+                    </div>
+                    <div class="bloco-info">
+                        <h3>Restaurantes da região</h3>
+                        <ul>
+                            <li>SENAC Restaurante</li>
+                            <li>Cafofinho da Tia Dica</li>
+                            <li>Caçarola Bistrô</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

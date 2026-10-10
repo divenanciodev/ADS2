@@ -1,0 +1,351 @@
+let user = null;
+let currentAvatar = '';
+let currentCover = '';
+let skills = [];
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await State.ensureReady();
+    user = await Layout.init({ active: 'editar-perfil' });
+    if (!user) return;
+    currentAvatar = user.foto_perfil || '';
+    currentCover = user.capa_perfil || '';
+    skills = Array.isArray(user.habilidades) ? [...user.habilidades] : [];
+    loadFields();
+});
+
+/* ─── CARREGAR CAMPOS ─────────────────────────────────── */
+function loadFields() {
+    const fallbackAvatar = `assets/avatars/avatar.svg`;
+
+    setVal('edit-name',      user.nome_completo || '');
+    setVal('edit-username',  user.nome_usuario  || '');
+    setVal('edit-bio',       user.biografia     || '');
+    setVal('edit-about',     user.sobre         || '');
+    setVal('edit-role',      user.cargo         || '');
+    
+    // Lógica de Área de Atuação
+    const areaSelect = document.getElementById('edit-area');
+    if (areaSelect) {
+        const predefinedAreas = Array.from(areaSelect.options).map(opt => opt.value);
+        if (user.area && !predefinedAreas.includes(user.area)) {
+            const opt = document.createElement('option');
+            opt.value = user.area;
+            opt.text = user.area;
+            areaSelect.add(opt, areaSelect.options[areaSelect.options.length - 1]);
+            areaSelect.value = user.area;
+        } else {
+            areaSelect.value = user.area || '';
+        }
+    }
+
+    setVal('edit-linkedin',  user.linkedin      || '');
+    setVal('edit-github',    user.github        || '');
+    setVal('edit-portfolio', user.portfolio     || '');
+    setVal('edit-instagram', user.instagram     || '');
+
+    const avatarSrc = currentAvatar || fallbackAvatar;
+    setImg('edit-avatar-preview', avatarSrc);
+    setImg('preview-avatar-img',  avatarSrc);
+
+    if (currentCover) {
+        const coverImg = document.getElementById('edit-cover-preview');
+        if (coverImg) {
+            coverImg.src = currentCover;
+            coverImg.style.display = 'block';
+        }
+    }
+
+    updateBioCount();
+    updateAboutCount();
+    renderSkills();
+    updatePreview();
+}
+
+function setVal(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+}
+function setImg(id, src) {
+    const el = document.getElementById(id);
+    if (el) el.src = src;
+}
+
+/* ─── COMPRESSÃO DE IMAGEM ────────────────────────────── */
+/**
+ * Comprime uma imagem Base64 para reduzir o tamanho antes de salvar.
+ * Redimensiona para no máximo maxWidth px e recomprime em JPEG.
+ */
+function compressImage(base64String, maxWidth = 800, quality = 0.75) {
+    return new Promise((resolve) => {
+        if (!base64String || !base64String.startsWith('data:image')) {
+            resolve(base64String);
+            return;
+        }
+        const img = new Image();
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let { width, height } = img;
+            if (width > maxWidth) {
+                height = Math.round((height * maxWidth) / width);
+                width = maxWidth;
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = () => resolve(base64String);
+        img.src = base64String;
+    });
+}
+
+/* ─── UPLOADS ────────────────────────────────────────── */
+document.getElementById('avatar-upload').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+        Layout.showToast('Imagem muito grande. Máx. 5 MB.'); return;
+    }
+    const reader = new FileReader();
+    reader.onload = async (ev) => {
+        // CORREÇÃO: comprime a imagem antes de armazenar para evitar
+        // falha silenciosa no Supabase por payload muito grande.
+        const compressed = await compressImage(ev.target.result, 800, 0.8);
+        currentAvatar = compressed;
+        setImg('edit-avatar-preview', currentAvatar);
+        setImg('preview-avatar-img',  currentAvatar);
+    };
+    reader.readAsDataURL(file);
+});
+
+document.getElementById('cover-upload').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+        Layout.showToast('Imagem muito grande. Máx. 5 MB.'); return;
+    }
+    const reader = new FileReader();
+    reader.onload = async (ev) => {
+        // CORREÇÃO: comprime a imagem de capa antes de armazenar.
+        const compressed = await compressImage(ev.target.result, 1200, 0.8);
+        currentCover = compressed;
+        const coverImg = document.getElementById('edit-cover-preview');
+        if (coverImg) {
+            coverImg.src = currentCover;
+            coverImg.style.display = 'block';
+        }
+    };
+    reader.readAsDataURL(file);
+});
+
+document.getElementById('btn-remove-avatar')?.addEventListener('click', () => {
+    currentAvatar = '';
+    const fallback = `assets/avatars/avatar.svg`;
+    setImg('edit-avatar-preview', fallback);
+    setImg('preview-avatar-img',  fallback);
+    document.getElementById('avatar-upload').value = '';
+});
+
+/* ─── ÁREA DE ATUAÇÃO ────────────────────────────────── */
+function toggleCustomArea(val) {
+    if (val === 'Outra') {
+        openCustomAreaModal();
+    }
+}
+
+function openCustomAreaModal() {
+    const modalHtml = `
+        <div id="custom-area-modal" class="modal modal-detail-overlay" style="display: flex; z-index: 10002;">
+            <div class="modal-content" style="max-width: 400px; height: auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Sua Atuação</h2>
+                    <button onclick="document.getElementById('custom-area-modal').remove()" style="font-size: 24px;">&times;</button>
+                </div>
+                <div class="form-group">
+                    <label>Digite sua área de atuação</label>
+                    <input type="text" id="custom-area-input" class="form-control" placeholder="Ex: Desenvolvedora Web">
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button onclick="saveCustomArea()" class="btn btn-primary" style="flex: 1;">Confirmar</button>
+                    <button onclick="document.getElementById('custom-area-modal').remove()" class="btn btn-outline" style="flex: 1;">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
+
+function saveCustomArea() {
+    const val = document.getElementById('custom-area-input').value.trim();
+    if (val) {
+        const select = document.getElementById('edit-area');
+        // Adicionar nova opção e selecionar
+        const opt = document.createElement('option');
+        opt.value = val;
+        opt.text = val;
+        select.add(opt, select.options[select.options.length - 1]);
+        select.value = val;
+    }
+    document.getElementById('custom-area-modal').remove();
+}
+
+/* ─── CONTADORES ──────────────────────────────────────── */
+function updateBioCount() {
+    const bio   = document.getElementById('edit-bio');
+    const count = document.getElementById('bio-count');
+    if (bio && count) {
+        count.textContent = bio.value.length;
+    }
+}
+function updateAboutCount() {
+    const about = document.getElementById('edit-about');
+    const count = document.getElementById('about-count');
+    if (about && count) {
+        count.textContent = about.value.length;
+    }
+}
+
+document.getElementById('edit-bio')?.addEventListener('input', () => {
+    updateBioCount();
+    updatePreview();
+});
+document.getElementById('edit-about')?.addEventListener('input', updateAboutCount);
+
+/* ─── PRÉVIA EM TEMPO REAL ────────────────────────────── */
+function updatePreview() {
+    const name = document.getElementById('edit-name')?.value   || 'Seu Nome';
+    const role = document.getElementById('edit-role')?.value   || 'Cargo';
+    const bio  = document.getElementById('edit-bio')?.value    || 'Sua bio aparecerá aqui.';
+
+    setText('preview-name', name);
+    setText('preview-role', role || 'Cargo');
+    setText('preview-bio',  bio  || 'Sua bio aparecerá aqui.');
+}
+
+function setText(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+}
+
+['edit-name', 'edit-role'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', updatePreview);
+});
+
+/* ─── HABILIDADES ─────────────────────────────────────── */
+function renderSkills() {
+    const container = document.getElementById('skills-tags');
+    const preview   = document.getElementById('preview-skills');
+    if (!container) return;
+
+    container.innerHTML = skills.map((s, i) => `
+        <span class="skill-tag">
+            ${s}
+            <button type="button" class="skill-remove" data-i="${i}" title="Remover">×</button>
+        </span>
+    `).join('');
+
+    if (preview) {
+        preview.innerHTML = skills.slice(0, 5).map(s =>
+            `<span class="preview-skill-tag">${s}</span>`
+        ).join('');
+    }
+
+    container.querySelectorAll('.skill-remove').forEach(btn => {
+        btn.addEventListener('click', () => {
+            skills.splice(Number(btn.dataset.i), 1);
+            renderSkills();
+        });
+    });
+}
+
+function addSkill() {
+    const input = document.getElementById('skill-input');
+    if (!input) return;
+    const val = input.value.trim();
+    if (!val) return;
+    if (skills.length >= 15) { Layout.showToast('Máx. 15 habilidades.'); return; }
+    if (skills.map(s => s.toLowerCase()).includes(val.toLowerCase())) {
+        Layout.showToast('Habilidade já adicionada.'); return;
+    }
+    skills.push(val);
+    input.value = '';
+    renderSkills();
+}
+
+document.getElementById('btn-add-skill')?.addEventListener('click', addSkill);
+document.getElementById('skill-input')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); addSkill(); }
+});
+
+/* ─── VALIDAÇÃO ───────────────────────────────────────── */
+function validate() {
+    let ok = true;
+
+    const name = document.getElementById('edit-name')?.value.trim();
+    const errName = document.getElementById('err-name');
+    if (!name) {
+        if (errName) errName.textContent = 'Nome é obrigatório.';
+        ok = false;
+    } else if (errName) errName.textContent = '';
+
+    const username = document.getElementById('edit-username')?.value.trim();
+    const errUser  = document.getElementById('err-username');
+    if (!username) {
+        if (errUser) errUser.textContent = 'Nome de usuária é obrigatório.';
+        ok = false;
+    } else if (!/^[a-zA-Z0-9_.]+$/.test(username)) {
+        if (errUser) errUser.textContent = 'Use apenas letras, números, _ ou .';
+        ok = false;
+    } else if (errUser) errUser.textContent = '';
+
+    return ok;
+}
+
+/* ─── SALVAR ──────────────────────────────────────────── */
+document.getElementById('edit-profile-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const areaSelect = document.getElementById('edit-area');
+    const customAreaInput = document.getElementById('edit-area-custom');
+    let finalArea = areaSelect?.value;
+    if (finalArea === 'Outra' && customAreaInput?.value.trim()) {
+        finalArea = customAreaInput.value.trim();
+    }
+
+    // Desabilitar botão durante o salvamento para evitar duplo clique
+    const submitBtn = document.querySelector('[form="edit-profile-form"]');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Salvando...';
+    }
+
+    const updatedUser = {
+        ...user,
+        nome_completo: document.getElementById('edit-name')?.value.trim(),
+        nome_usuario:  document.getElementById('edit-username')?.value.trim(),
+        biografia:     document.getElementById('edit-bio')?.value.trim(),
+        sobre:         document.getElementById('edit-about')?.value.trim(),
+        cargo:         document.getElementById('edit-role')?.value.trim(),
+        area:          finalArea,
+        linkedin:      document.getElementById('edit-linkedin')?.value.trim(),
+        github:        document.getElementById('edit-github')?.value.trim(),
+        portfolio:     document.getElementById('edit-portfolio')?.value.trim(),
+        instagram:     document.getElementById('edit-instagram')?.value.trim(),
+        habilidades:   skills,
+        foto_perfil:   currentAvatar,
+        capa_perfil:   currentCover
+    };
+
+    await State.setCurrentUser(updatedUser);
+
+    // Reabilitar botão em caso de erro
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="icon-check"></i> Salvar Alterações';
+    }
+
+    Layout.showToast('Perfil atualizado com sucesso! ✨');
+    setTimeout(() => window.location.href = 'perfil.html', 1100);
+});

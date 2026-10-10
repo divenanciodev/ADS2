@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Contato</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="formulario">
+      <h1>Formulario de contato</h1>
+
+      <form id="formulario">
+        <label>
+          Nome
+          <input type="text" name="name" placeholder="Seu nome" required />
+        </label>
+
+        <label>
+          E-mail
+          <input type="email" name="email" placeholder="voce@email.com" required />
+        </label>
+
+        <label>
+          Estado
+          <select name="state" required>
+            <option value="">Selecione o estado</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceara</option>
+            <option value="PB">Paraiba</option>
+            <option value="PE">Pernambuco</option>
+            <option value="RN">Rio Grande do Norte</option>
+          </select>
+        </label>
+
+        <label>
+          Senha
+          <input
+            type="password"
+            name="password"
+            placeholder="Digite sua senha"
+            minlength="4"
+            required
+          />
+        </label>
+
+        <label>
+          Mensagem
+          <textarea
+            name="message"
+            rows="5"
+            placeholder="Escreva sua mensagem"
+            required
+          ></textarea>
+        </label>
+
+        <button type="submit">Enviar</button>
+      </form>
+
+      <p id="mensagem"></p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
