@@ -4,10 +4,10 @@ Resolução do problema - Criar um site baseado no modelo abaixo:
 <!-- ABOUT THE PROJECT -->
 ## Modelo a ser seguido
 
-![Imagem](https://github.com/divenanciodev/atividade-roboticsgra/blob/main/img/modelosite.png)
+![Imagem](img/modelosite.png)
 
 <p align="right"</p>
 
 ## Resultado Final
 
-![Imagem](https://github.com/divenanciodev/atividade-roboticsgra/blob/main/img/resultadofinal.png)
+![Imagem](img/resultadofinal.png)

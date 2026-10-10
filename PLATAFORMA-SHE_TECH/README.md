@@ -25,12 +25,7 @@ A **SheTech** surge como uma solução para conectar essas pessoas em uma comuni
 ---
 
 ### Evidências do Cenário Atual 
-<div align="center">
-  <img src="https://github.com/divenanciodev/web-trabalho-oficial/blob/main/assets/Blue%20Coral%20and%20Peach%20Simple%20Budget%20Pie%20Chart%20Graph.png?raw=true" alt="Descrição da Imagem 1" width="45%">
-  
-  <img src="https://github.com/divenanciodev/web-trabalho-oficial/blob/main/assets/Blue%20Coral%20and%20Peach%20Simple%20Budget%20Pie%20Chart%20Graph%20(1).png?raw=true" alt="Descrição da Imagem 2" width="45%">
-  <p><i>Legenda: Representação visual dos desafios enfrentados por mulheres na tecnologia.</i></p>
-</div>
+Os gráficos desta seção não estão disponíveis nos arquivos do repositório.
 
 ---
 
@@ -56,14 +51,6 @@ O projeto utiliza uma stack moderna focada em performance e escalabilidade:
 
 A arquitetura da plataforma **SheTech** é modular, dividida em três componentes principais: **Frontend**, **Backend** e **Banco de Dados/BaaS**. Essa estrutura permite uma clara separação de responsabilidades e facilita a manutenção e a escalabilidade do sistema.
 
-<div align="center">
-
-<img src="https://github.com/divenanciodev/web-trabalho-oficial/blob/main/assets/GRAFICO01.png?raw=true" alt="Gráfico da arquitetura" width="45%">
-
-<i>Legenda: Representação visual da arquitetura do sistema.</i>
-
-</div>
-
 #### O que cada componente controla
 
 - **Frontend (Interface do Usuário):** Responsável pela interação direta com a usuária, desenvolvido em HTML, CSS e JavaScript.
@@ -74,12 +61,7 @@ A arquitetura da plataforma **SheTech** é modular, dividida em três componente
   
   - **2.2. Fluxo de Interação do Usuário**
   O fluxo de interação da usuária com a plataforma segue um padrão bem definido, garantindo uma experiência intuitiva e responsiva. Desde o acesso inicial até a     interação com as funcionalidades, o sistema é projetado para ser dinâmico e em tempo real.
-  <div align="center">
-
-  <img src="https://github.com/divenanciodev/web-trabalho-oficial/blob/main/assets/imagemfluxo.png?raw=true" alt="Grafico do fluxo do sistema" width="45%">
-  <p><i>Legenda: Representação visual do fluxo do sistema. </i></p>
-</div>
-  O diagrama acima ilustra a sequência de eventos desde o acesso da usuária até a interação com o backend e o banco de dados, destacando a comunicação entre os componentes do sistema.
+  O fluxo vai do acesso da usuária à interação com o backend e o banco de dados, destacando a comunicação entre os componentes do sistema.
 
 ---
 

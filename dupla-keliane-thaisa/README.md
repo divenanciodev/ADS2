@@ -4,7 +4,7 @@ Resolução do problema - Teclado.  (2021-3ª fase) - Olimpíada Brasileira de I
 <!-- ABOUT THE PROJECT -->
 ## Sobre o Projeto
 
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/1.png?raw=true)
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/1.png)
 
 <p align="right"</p>
 
@@ -35,21 +35,21 @@ Resolução do problema - Teclado.  (2021-3ª fase) - Olimpíada Brasileira de I
 <!-- GETTING STARTED -->
 ## Entendendo o Problema
 
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/2.png?raw=true)
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/2.png)
 
 ---
 ### Entendendo as Entradas
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/3.png?raw=true)
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/3.png)
 ---
 ### Entendendo a saída
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/4.png?raw=true)
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/4.png)
 ---
 ### Entendendo os Limites do Programa
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/5.png?raw=true)
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/5.png)
 ---
 
 ### Entradas do Código e Modelo Visual
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/7.png?raw=true)
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/7.png)
 ---
 ### VS Code
 Dentro do Vs Code a primeira coisa a se fazer é importar a biblioteca easygui para usar caixas de diálogo gráficas
@@ -77,7 +77,7 @@ Abre uma caixa de diálogo que pede ao usuário para digitar o número de telefo
   ```
 
 ### Processamento do Código e Modelo Visual
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/8.png?raw=true)
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/8.png)
 
 ### ☑️Lista
 A primeira linha cria uma lista vazia chamada palavras que  guarda todas as palavras que o usuário digitar. Na segunda linha começa um laço que se repete M vezes. Na terceira linha mostra uma caixa pedindo a palavra número e lower transforma a palavra para letras minúsculas. E na quarta linha será adicionado a palavra digitada à lista palavras
@@ -108,7 +108,7 @@ Inicializa o contador contagem com zero. Ele vai contar quantas palavras validas
   ```
 
 ### Saídas do Código e Modelo Visual 
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/9.png?raw=true)
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/9.png)
 
 ### 💻Resultado
 Depois que todas as palavras foram testadas, o programa mostra uma janela dizendo quantas palavras combinam com o número.
@@ -118,17 +118,16 @@ Depois que todas as palavras foram testadas, o programa mostra uma janela dizend
   ```
 
 ### Envio dos Arquivos via Git Bash
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/Captura%20de%20tela%202025-11-24%20094029.png?raw=true)
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/Captura%20de%20tela%202025-11-24%20094029.png)
 
 ### Passo a Passo
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/Captura%20de%20tela%202025-11-24%20094125.png?raw=true)
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/Captura%20de%20tela%202025-11-24%20094125.png)
 
 ### 💻Preparando para enviar
 O git já estava configurado com email e usuário, após isso foi clonado o repositório destino e dentro dessa pasta foi iniciado o git bash. Em seguida foi copiado os arquivos da pasta local para dentro da pasta clonada, após isso foi feito o git status para analisar quais arquivos estariam sendo enviados e por fim, o envio: usando o comando (git add . ) que prepara os arquivos a serem enviados, por conseguinte (git commit -m "Mensagem") e finaliza com (git push) que envia as alterações para o repositório. 
 
 ### Final
-![Imagem](https://github.com/divenanciodev/dupla-keliane-thaisa/blob/main/resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/Captura%20de%20tela%202025-11-24%20094147.png?raw=true)
-
+![Imagem](resolu%C3%A7%C3%A3o_teclado/3%C2%AAfase_2021/Explica%C3%A7%C3%A3oProblema/Captura%20de%20tela%202025-11-24%20094147.png)
 
 
 
